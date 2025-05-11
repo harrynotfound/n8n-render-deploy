@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: n8n
+    runtime: docker
+    plan: free
+    branch: main
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /
+    envVars:
+      - key: DB_TYPE
+        value: postgres
+      - key: DB_POSTGRESDB_HOST
+        fromService:
+          type: postgresql
+          name: john doe
+          property: host
+      - key: DB_POSTGRESDB_PORT
+        fromService:
+          type: postgresql
+          name: john doe
+          property: port
+      - key: DB_POSTGRESDB_DATABASE
+        fromService:
+          type: postgresql
+          name: john doe
+          property: database
+      - key: DB_POSTGRESDB_USER
+        fromService:
+          type: postgresql
+          name: john doe
+          property: user
+      - key: DB_POSTGRESDB_PASSWORD
+        fromService:
+          type: postgresql
+          name: john doe
+          property: password
+      - key: N8N_HOST
+        value: your-subdomain.onrender.com
+      - key: WEBHOOK_URL
+        value: https://your-subdomain.onrender.com/
+      - key: GENERIC_TIMEZONE
+        value: Asia/Kolkata
+      - key: N8N_BASIC_AUTH_ACTIVE
+        value: "true"
+      - key: N8N_BASIC_AUTH_USER
+        value: admin
+      - key: N8N_BASIC_AUTH_PASSWORD
+        value: password123
